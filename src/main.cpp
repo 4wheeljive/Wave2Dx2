@@ -16,17 +16,31 @@ uint16_t ledNum = 0;
 #define DATA_PIN_2 3
 #define DATA_PIN_3 4
 
-#define BRIGHTNESS 75
+#define BRIGHTNESS 50
 
 using namespace fl;
 
-extern uint16_t loc2indProgByColBottomUp[48][32] ;
+bool screenTest = false;
+bool blendLayers = true;
 
-uint16_t myXYFunction(uint16_t x, uint16_t y, uint16_t width, uint16_t height);
+extern uint16_t loc2indProgByColBottomUp[48][32];
+extern uint16_t loc2indProg[1536];
 
-XYMap myXYmap = XYMap::constructWithUserFunction(WIDTH, HEIGHT, myXYFunction);
+uint16_t myXYFunctionLED(uint16_t x, uint16_t y, uint16_t width, uint16_t height);
+//uint16_t myXYFunctionScreen(uint16_t x, uint16_t y, uint16_t width, uint16_t height);
 
+XYMap myXYmap = XYMap::constructWithUserFunction(WIDTH, HEIGHT, myXYFunctionLED);
+//XYMap myXYmap = XYMap::constructWithUserFunction(WIDTH, HEIGHT, myXYFunctionScreen);
 XYMap xyRect(WIDTH, HEIGHT, false);   // For the wave simulation (always rectangular grid)
+
+
+//#define IS_SERPENTINE false
+//XYMap xyRect = XYMap::constructRectangularGrid(WIDTH, HEIGHT);
+//uint16_t myXYFuncScreen(uint16_t x, uint16_t y, uint16_t width, uint16_t height);
+//XYMap myXYmap(WIDTH, HEIGHT, IS_SERPENTINE);
+//XYMap myXYrect = XYMap::constructWithUserFunction(WIDTH, HEIGHT, myXYFunction);
+//XYMap myXYmap = XYMap::constructRectangularGrid(WIDTH, HEIGHT);
+
 
 //************************************************************************************************************
 
@@ -37,7 +51,7 @@ XYMap xyRect(WIDTH, HEIGHT, false);   // For the wave simulation (always rectang
 #include "fx/2d/wave.h"     
 
 UIButton button("Trigger");                              
-UICheckbox autoTrigger("Auto Trigger", true);  
+UICheckbox autoTrigger("Auto Trigger", true);   
 UISlider triggerSpeed("Trigger Speed", .5f, 0.0f, 1.0f, 0.01f);
 UICheckbox easeModeSqrt("Ease Mode Sqrt", false);    
 UISlider blurAmount("Global Blur Amount", 0, 0, 172, 1);  
@@ -82,7 +96,7 @@ WaveFx::Args CreateArgsLower() {
     out.auto_updates = true;  
     out.speed = 0.18f; 
     out.dampening = 9.0f;
-    out.crgbMap = WaveCrgbGradientMapPtr::New(electricGreenFirePal);  
+    out.crgbMap = WaveCrgbGradientMapPtr::New(electricBlueFirePal);  
     return out;
 }  
 
@@ -93,12 +107,12 @@ WaveFx::Args CreateArgsUpper() {
     out.auto_updates = true; 
     out.speed = 0.25f;      
     out.dampening = 3.0f;     
-    out.crgbMap = WaveCrgbGradientMapPtr::New(electricBlueFirePal); 
+    out.crgbMap = WaveCrgbGradientMapPtr::New(electricGreenFirePal); 
     return out;
 }
 
-WaveFx waveFxLower(xyRect, CreateArgsLower());
-WaveFx waveFxUpper(xyRect, CreateArgsUpper()); 
+WaveFx waveFxLower(myXYmap, CreateArgsLower());
+WaveFx waveFxUpper(myXYmap, CreateArgsUpper()); 
 
 Blend2d fxBlend(myXYmap);
 
@@ -118,6 +132,7 @@ SuperSample getSuperSample() {
         return SuperSample::SUPER_SAMPLE_NONE;
     }
 }
+
 
 //************************************************************************************************************
 
@@ -161,7 +176,6 @@ ui_state ui() {
     waveFxUpper.setHalfDuplex(halfDuplexUpper);   
     waveFxUpper.setSuperSample(getSuperSample()); 
     waveFxUpper.setEasingMode(easeMode);      
-
    
     fxBlend.setGlobalBlurAmount(blurAmount);      
     fxBlend.setGlobalBlurPasses(blurPasses);     
@@ -202,8 +216,8 @@ void processAutoTrigger(uint32_t now) {
             triggerRipple();
   
             float speed = 1.0f - triggerSpeed.value();
-            uint32_t min_rand = 400 * speed; 
-            uint32_t max_rand = 2000 * speed; 
+            uint32_t min_rand = 500 * speed; 
+            uint32_t max_rand = 3000 * speed; 
 
             uint32_t min = MIN(min_rand, max_rand);
             uint32_t max = MAX(min_rand, max_rand);
@@ -221,22 +235,32 @@ void processAutoTrigger(uint32_t now) {
 
 void setup() {
    
-    FastLED.addLeds<WS2812B, DATA_PIN_1, GRB>(leds, 0, NUM_LEDS_PER_SEGMENT)
-        .setCorrection(TypicalLEDStrip);
+    if (screenTest) {
+        auto screenmap = xyRect.toScreenMap();
+        screenmap.setDiameter(.2);
+        FastLED.addLeds<NEOPIXEL, DATA_PIN_1>(leds, NUM_LEDS).setScreenMap(screenmap);
+    }
+    else {
 
-    FastLED.addLeds<WS2812B, DATA_PIN_2, GRB>(leds, NUM_LEDS_PER_SEGMENT, NUM_LEDS_PER_SEGMENT)
-        .setCorrection(TypicalLEDStrip);
-    
-    FastLED.addLeds<WS2812B, DATA_PIN_3, GRB>(leds, NUM_LEDS_PER_SEGMENT * 2, NUM_LEDS_PER_SEGMENT)
-        .setCorrection(TypicalLEDStrip);
-    
-    FastLED.setBrightness(BRIGHTNESS);
+        FastLED.addLeds<WS2812B, DATA_PIN_1, GRB>(leds, 0, NUM_LEDS_PER_SEGMENT)
+            .setCorrection(TypicalLEDStrip);
+
+        FastLED.addLeds<WS2812B, DATA_PIN_2, GRB>(leds, NUM_LEDS_PER_SEGMENT, NUM_LEDS_PER_SEGMENT)
+            .setCorrection(TypicalLEDStrip);
+        
+        FastLED.addLeds<WS2812B, DATA_PIN_3, GRB>(leds, NUM_LEDS_PER_SEGMENT * 2, NUM_LEDS_PER_SEGMENT)
+            .setCorrection(TypicalLEDStrip);
+        
+        FastLED.setBrightness(BRIGHTNESS);
+    }
 
     FastLED.clear();
     FastLED.show();
-   
-    fxBlend.add(waveFxLower);
-    fxBlend.add(waveFxUpper);
+
+    if (blendLayers){
+        fxBlend.add(waveFxLower);
+        fxBlend.add(waveFxUpper);
+    }
 
 }
 
@@ -248,15 +272,20 @@ void loop() {
 
     ui_state state = ui();
     
-    if (state.button) {
-        triggerRipple(); 
-    }
+   // EVERY_N_MILLISECONDS (3000) {
+    //    triggerRipple(); 
+    //}
     
     processAutoTrigger(now);
     
     Fx::DrawContext ctx(now, leds);
     
-    fxBlend.draw(ctx);
+    if (blendLayers){
+        fxBlend.draw(ctx);
+    }
+    else{
+        waveFxLower.draw(ctx);
+    }
     
     FastLED.show();
 
@@ -264,10 +293,21 @@ void loop() {
 
 //************************************************************************************************************
 
-uint16_t myXYFunction(uint16_t x, uint16_t y, uint16_t width, uint16_t height) {
+
+uint16_t myXYFunctionLED(uint16_t x, uint16_t y, uint16_t width, uint16_t height) {
     width = WIDTH;
     height = HEIGHT;
     if (x >= width || y >= height) return 0;
     ledNum = loc2indProgByColBottomUp[x][y];
+    return ledNum;
+}
+
+
+uint16_t myXYFunctionScreen(uint16_t x, uint16_t y, uint16_t width, uint16_t height) {
+    width = WIDTH;
+    height = HEIGHT;
+    if (x >= width || y >= height) return 0;
+    uint16_t j = (y * WIDTH) + x;
+    ledNum = loc2indProg[j];
     return ledNum;
 }
