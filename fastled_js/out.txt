@@ -1,10 +1,10 @@
 Starting FastLED WASM compilation script...
 Keep files flag: False
-Using mapped directory: /tmp/tmpwpzhls47
+Using mapped directory: /tmp/tmp_0oq1qlj
 Normal build, so removing /js/src
 Copying files from mapped directory to container...
-Copying directory: /tmp/tmpwpzhls47/wasm/src
-Copying file: /tmp/tmpwpzhls47/wasm/build_mode.txt -> /js/src/build_mode.txt
+Copying directory: /tmp/tmp_0oq1qlj/wasm/src
+Copying file: /tmp/tmp_0oq1qlj/wasm/build_mode.txt -> /js/src/build_mode.txt
 Transforming files to cpp...
 
 ########################################
@@ -49,112 +49,112 @@ Command cwd: /js
 #   pio run -v -e wasm-quick  #
 ###############################
 
-0.49 Warning! Ignore unknown configuration option `force_verbose` in section [env:wasm-base]
-0.49 Warning! Ignore unknown configuration option `link_flags` in section [env:wasm-base]
-0.49 Warning! Ignore unknown configuration option `build_dir` in section [env:wasm-debug]
-0.49 Warning! Ignore unknown configuration option `link_flags` in section [env:wasm-debug]
-0.49 Warning! Ignore unknown configuration option `build_dir` in section [env:wasm-quick]
-0.49 Warning! Ignore unknown configuration option `link_flags` in section [env:wasm-quick]
-0.49 Warning! Ignore unknown configuration option `build_dir` in section [env:wasm-release]
-0.49 Warning! Ignore unknown configuration option `link_flags` in section [env:wasm-release]
-0.50 Processing wasm-quick (extends: wasm-base; platform: native; lib_ldf_mode: off; extra_scripts: post:wasm_compiler_flags.py; build_dir: build/wasm; custom_wasm_export_name: fastled; build_flags: -DFASTLED_ENGINE_EVENTS_MAX_LISTENERS=50, -DFASTLED_FORCE_NAMESPACE=1, -DFASTLED_USE_PROGMEM=0, -DUSE_OFFSET_CONVERTER=0, -DSKETCH_COMPILE=1, -std=gnu++17, -fpermissive, -Wno-constant-logical-operand, -Wnon-c-typedef-for-linkage, -Werror=bad-function-cast, -Werror=cast-function-type, -Wno-comment, -Isrc, -Isrc, -Isrc/platforms/wasm/compiler, -O0, -sASSERTIONS=0, -g0, -fno-inline-functions, -fno-vectorize, -fno-unroll-loops, -fno-strict-aliasing, -L/build/quick -lfastled; link_flags:
-0.50 
-0.50 --bind
-0.50 -fuse-ld=lld
-0.50 -sWASM=1
-0.50 -sALLOW_MEMORY_GROWTH=1
-0.50 -sINITIAL_MEMORY=134217728
-0.50 -sEXPORTED_RUNTIME_METHODS=['ccall','cwrap','stringToUTF8','lengthBytesUTF8']
-0.50 -sEXPORTED_FUNCTIONS=['_malloc','_free','_extern_setup','_extern_loop','_fastled_declare_files']
-0.50 --no-entry
-0.50 --emit-symbol-map
-0.50 -sMODULARIZE=1
-0.50 -sEXPORT_NAME=fastled
-0.50 -sUSE_PTHREADS=0
-0.50 -sEXIT_RUNTIME=0
-0.50 -sFILESYSTEM=0
-0.50 -Wl,--whole-archive
-0.50 --source-map-base=http://localhost:8000/
-0.50 -sASSERTIONS=0)
-0.50 --------------------------------------------------------------------------------
-1.10 LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
-1.10 LDF Modes: Finder ~ off, Compatibility ~ soft
-1.10 Found 0 compatible libraries
-1.10 Scanning dependencies...
-1.10 No dependencies
-1.10 Building in release mode
-1.11 
-1.11 #########################
-1.11 # C++/C Compiler Flags: #
-1.11 #########################
-1.11 
-1.11 CC/CXX flags:
-1.11   -DFASTLED_ENGINE_EVENTS_MAX_LISTENERS=50
-1.11   -DFASTLED_FORCE_NAMESPACE=1
-1.11   -DFASTLED_USE_PROGMEM=0
-1.11   -DUSE_OFFSET_CONVERTER=0
-1.11   -std=gnu++17
-1.11   -fpermissive
-1.11   -Wno-constant-logical-operand
-1.11   -Wnon-c-typedef-for-linkage
-1.11   -Werror=bad-function-cast
-1.11   -Werror=cast-function-type
-1.11   -sERROR_ON_WASM_CHANGES_AFTER_LINK
-1.11   -I
-1.11   src
-1.11   -I/js/fastled/src/platforms/wasm/compiler
-1.11   -Oz
-1.11 FastLED Library CC flags:
-1.11   -Werror=bad-function-cast
-1.11   -Werror=cast-function-type
-1.11   -I/js/fastled/src/platforms/wasm/compiler
-1.11 Sketch CC flags:
-1.11 
-1.11 #################
-1.11 # Linker Flags: #
-1.11 #################
-1.11 
-1.11   --bind
-1.11   -fuse-ld=lld
-1.11   -sWASM=1
-1.11   -sALLOW_MEMORY_GROWTH=1
-1.11   -sINITIAL_MEMORY=134217728
-1.11   -sEXPORTED_RUNTIME_METHODS=['ccall','cwrap','stringToUTF8','lengthBytesUTF8']
-1.11   -sEXPORTED_FUNCTIONS=['_malloc','_free','_extern_setup','_extern_loop','_fastled_declare_files']
-1.11   --no-entry
-1.11   -sMODULARIZE=1
-1.11   -sEXPORT_NAME=fastled
-1.11   -o
-1.11   /js/.pio/build/wasm-quick/fastled.js
-1.11 
-1.11 ##########################
-1.11 # FastLED Library Flags: #
-1.11 ##########################
-1.11 
-1.11   --bind
-1.11   -Wl,--whole-archive,-fuse-ld=lld
-1.11   -Werror=bad-function-cast
-1.11   -Werror=cast-function-type
-1.11 
-1.11 #######################################
-1.11 # End of Flags                        #
-1.11 # Begin compile/link using PlatformIO #
-1.11 #######################################
-1.11 
-1.30 ccache em++ -o .pio/build/wasm-quick/src/src/main.o -c -std=gnu++17 -fpermissive -Wno-constant-logical-operand -Wnon-c-typedef-for-linkage -Werror=bad-function-cast -Werror=cast-function-type -Wno-comment -O0 -sASSERTIONS=0 -g0 -fno-inline-functions -fno-vectorize -fno-unroll-loops -fno-strict-aliasing -DPLATFORMIO=60118 -DFASTLED_ENGINE_EVENTS_MAX_LISTENERS=50 -DFASTLED_FORCE_NAMESPACE=1 -DFASTLED_USE_PROGMEM=0 -DUSE_OFFSET_CONVERTER=0 -DSKETCH_COMPILE=1 -Isrc -Isrc -Isrc/platforms/wasm/compiler src/src/main.cpp
-1.31 ccache em++ -o .pio/build/wasm-quick/src/src/mapping.o -c -std=gnu++17 -fpermissive -Wno-constant-logical-operand -Wnon-c-typedef-for-linkage -Werror=bad-function-cast -Werror=cast-function-type -Wno-comment -O0 -sASSERTIONS=0 -g0 -fno-inline-functions -fno-vectorize -fno-unroll-loops -fno-strict-aliasing -DPLATFORMIO=60118 -DFASTLED_ENGINE_EVENTS_MAX_LISTENERS=50 -DFASTLED_FORCE_NAMESPACE=1 -DFASTLED_USE_PROGMEM=0 -DUSE_OFFSET_CONVERTER=0 -DSKETCH_COMPILE=1 -Isrc -Isrc -Isrc/platforms/wasm/compiler src/src/mapping.cpp
-1.39 em++: warning: linker setting ignored during compilation: 'ASSERTIONS' [-Wunused-command-line-argument]
-6.00 em++: warning: linker setting ignored during compilation: 'ASSERTIONS' [-Wunused-command-line-argument]
-6.08 ccache em++ -o .pio/build/wasm-quick/program --bind -fuse-ld=lld -sWASM=1 -sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=134217728 -sEXPORTED_RUNTIME_METHODS=['ccall','cwrap','stringToUTF8','lengthBytesUTF8'] -sEXPORTED_FUNCTIONS=['_malloc','_free','_extern_setup','_extern_loop','_fastled_declare_files'] --no-entry -sMODULARIZE=1 -sEXPORT_NAME=fastled -o /js/.pio/build/wasm-quick/fastled.js .pio/build/wasm-quick/src/src/main.o .pio/build/wasm-quick/src/src/mapping.o -L.pio/build/wasm-quick -L/build/quick -Wl,--start-group -lfastled -Wl,--end-group
-7.48 ========================= [SUCCESS] Took 6.99 seconds =========================
-7.48 
-7.48 Environment    Status    Duration
-7.48 -------------  --------  ------------
-7.48 wasm-base      IGNORED
-7.48 wasm-debug     IGNORED
-7.48 wasm-quick     SUCCESS   00:00:06.988
-7.48 wasm-release   IGNORED
-7.48 ========================= 1 succeeded in 00:00:06.988 =========================
+0.55 Warning! Ignore unknown configuration option `force_verbose` in section [env:wasm-base]
+0.55 Warning! Ignore unknown configuration option `link_flags` in section [env:wasm-base]
+0.55 Warning! Ignore unknown configuration option `build_dir` in section [env:wasm-debug]
+0.55 Warning! Ignore unknown configuration option `link_flags` in section [env:wasm-debug]
+0.55 Warning! Ignore unknown configuration option `build_dir` in section [env:wasm-quick]
+0.55 Warning! Ignore unknown configuration option `link_flags` in section [env:wasm-quick]
+0.55 Warning! Ignore unknown configuration option `build_dir` in section [env:wasm-release]
+0.55 Warning! Ignore unknown configuration option `link_flags` in section [env:wasm-release]
+0.55 Processing wasm-quick (extends: wasm-base; platform: native; lib_ldf_mode: off; extra_scripts: post:wasm_compiler_flags.py; build_dir: build/wasm; custom_wasm_export_name: fastled; build_flags: -DFASTLED_ENGINE_EVENTS_MAX_LISTENERS=50, -DFASTLED_FORCE_NAMESPACE=1, -DFASTLED_USE_PROGMEM=0, -DUSE_OFFSET_CONVERTER=0, -DSKETCH_COMPILE=1, -std=gnu++17, -fpermissive, -Wno-constant-logical-operand, -Wnon-c-typedef-for-linkage, -Werror=bad-function-cast, -Werror=cast-function-type, -Wno-comment, -Isrc, -Isrc, -Isrc/platforms/wasm/compiler, -O0, -sASSERTIONS=0, -g0, -fno-inline-functions, -fno-vectorize, -fno-unroll-loops, -fno-strict-aliasing, -L/build/quick -lfastled; link_flags:
+0.55 
+0.55 --bind
+0.55 -fuse-ld=lld
+0.55 -sWASM=1
+0.55 -sALLOW_MEMORY_GROWTH=1
+0.55 -sINITIAL_MEMORY=134217728
+0.55 -sEXPORTED_RUNTIME_METHODS=['ccall','cwrap','stringToUTF8','lengthBytesUTF8']
+0.55 -sEXPORTED_FUNCTIONS=['_malloc','_free','_extern_setup','_extern_loop','_fastled_declare_files']
+0.55 --no-entry
+0.55 --emit-symbol-map
+0.55 -sMODULARIZE=1
+0.55 -sEXPORT_NAME=fastled
+0.55 -sUSE_PTHREADS=0
+0.55 -sEXIT_RUNTIME=0
+0.55 -sFILESYSTEM=0
+0.55 -Wl,--whole-archive
+0.55 --source-map-base=http://localhost:8000/
+0.55 -sASSERTIONS=0)
+0.55 --------------------------------------------------------------------------------
+1.24 LDF: Library Dependency Finder -> https://bit.ly/configure-pio-ldf
+1.24 LDF Modes: Finder ~ off, Compatibility ~ soft
+1.24 Found 0 compatible libraries
+1.24 Scanning dependencies...
+1.24 No dependencies
+1.24 Building in release mode
+1.24 
+1.24 #########################
+1.24 # C++/C Compiler Flags: #
+1.24 #########################
+1.24 
+1.24 CC/CXX flags:
+1.24   -DFASTLED_ENGINE_EVENTS_MAX_LISTENERS=50
+1.24   -DFASTLED_FORCE_NAMESPACE=1
+1.24   -DFASTLED_USE_PROGMEM=0
+1.24   -DUSE_OFFSET_CONVERTER=0
+1.24   -std=gnu++17
+1.25   -fpermissive
+1.25   -Wno-constant-logical-operand
+1.25   -Wnon-c-typedef-for-linkage
+1.25   -Werror=bad-function-cast
+1.25   -Werror=cast-function-type
+1.25   -sERROR_ON_WASM_CHANGES_AFTER_LINK
+1.25   -I
+1.25   src
+1.25   -I/js/fastled/src/platforms/wasm/compiler
+1.25   -Oz
+1.25 FastLED Library CC flags:
+1.25   -Werror=bad-function-cast
+1.25   -Werror=cast-function-type
+1.25   -I/js/fastled/src/platforms/wasm/compiler
+1.25 Sketch CC flags:
+1.25 
+1.25 #################
+1.25 # Linker Flags: #
+1.25 #################
+1.25 
+1.25   --bind
+1.25   -fuse-ld=lld
+1.25   -sWASM=1
+1.25   -sALLOW_MEMORY_GROWTH=1
+1.25   -sINITIAL_MEMORY=134217728
+1.25   -sEXPORTED_RUNTIME_METHODS=['ccall','cwrap','stringToUTF8','lengthBytesUTF8']
+1.25   -sEXPORTED_FUNCTIONS=['_malloc','_free','_extern_setup','_extern_loop','_fastled_declare_files']
+1.25   --no-entry
+1.25   -sMODULARIZE=1
+1.25   -sEXPORT_NAME=fastled
+1.25   -o
+1.25   /js/.pio/build/wasm-quick/fastled.js
+1.25 
+1.25 ##########################
+1.25 # FastLED Library Flags: #
+1.25 ##########################
+1.25 
+1.25   --bind
+1.25   -Wl,--whole-archive,-fuse-ld=lld
+1.25   -Werror=bad-function-cast
+1.25   -Werror=cast-function-type
+1.25 
+1.25 #######################################
+1.25 # End of Flags                        #
+1.25 # Begin compile/link using PlatformIO #
+1.25 #######################################
+1.25 
+1.37 ccache em++ -o .pio/build/wasm-quick/src/src/main.o -c -std=gnu++17 -fpermissive -Wno-constant-logical-operand -Wnon-c-typedef-for-linkage -Werror=bad-function-cast -Werror=cast-function-type -Wno-comment -O0 -sASSERTIONS=0 -g0 -fno-inline-functions -fno-vectorize -fno-unroll-loops -fno-strict-aliasing -DPLATFORMIO=60118 -DFASTLED_ENGINE_EVENTS_MAX_LISTENERS=50 -DFASTLED_FORCE_NAMESPACE=1 -DFASTLED_USE_PROGMEM=0 -DUSE_OFFSET_CONVERTER=0 -DSKETCH_COMPILE=1 -Isrc -Isrc -Isrc/platforms/wasm/compiler src/src/main.cpp
+1.43 ccache em++ -o .pio/build/wasm-quick/src/src/mapping.o -c -std=gnu++17 -fpermissive -Wno-constant-logical-operand -Wnon-c-typedef-for-linkage -Werror=bad-function-cast -Werror=cast-function-type -Wno-comment -O0 -sASSERTIONS=0 -g0 -fno-inline-functions -fno-vectorize -fno-unroll-loops -fno-strict-aliasing -DPLATFORMIO=60118 -DFASTLED_ENGINE_EVENTS_MAX_LISTENERS=50 -DFASTLED_FORCE_NAMESPACE=1 -DFASTLED_USE_PROGMEM=0 -DUSE_OFFSET_CONVERTER=0 -DSKETCH_COMPILE=1 -Isrc -Isrc -Isrc/platforms/wasm/compiler src/src/mapping.cpp
+1.54 em++: warning: linker setting ignored during compilation: 'ASSERTIONS' [-Wunused-command-line-argument]
+5.48 em++: warning: linker setting ignored during compilation: 'ASSERTIONS' [-Wunused-command-line-argument]
+5.54 ccache em++ -o .pio/build/wasm-quick/program --bind -fuse-ld=lld -sWASM=1 -sALLOW_MEMORY_GROWTH=1 -sINITIAL_MEMORY=134217728 -sEXPORTED_RUNTIME_METHODS=['ccall','cwrap','stringToUTF8','lengthBytesUTF8'] -sEXPORTED_FUNCTIONS=['_malloc','_free','_extern_setup','_extern_loop','_fastled_declare_files'] --no-entry -sMODULARIZE=1 -sEXPORT_NAME=fastled -o /js/.pio/build/wasm-quick/fastled.js .pio/build/wasm-quick/src/src/main.o .pio/build/wasm-quick/src/src/mapping.o -L.pio/build/wasm-quick -L/build/quick -Wl,--start-group -lfastled -Wl,--end-group
+6.77 ========================= [SUCCESS] Took 6.22 seconds =========================
+6.77 
+6.77 Environment    Status    Duration
+6.77 -------------  --------  ------------
+6.77 wasm-base      IGNORED
+6.77 wasm-debug     IGNORED
+6.77 wasm-quick     SUCCESS   00:00:06.221
+6.77 wasm-release   IGNORED
+6.77 ========================= 1 succeeded in 00:00:06.221 =========================
 
 ##################################
 # Compilation process Finsished. #
@@ -174,11 +174,11 @@ Compilation return code: 0
 # Copying output files... #
 ###########################
 
-Copying /js/.pio/build/wasm-quick/fastled.js to /tmp/tmpwpzhls47/wasm/fastled_js/fastled.js
-Copying /js/.pio/build/wasm-quick/fastled.wasm to /tmp/tmpwpzhls47/wasm/fastled_js/fastled.wasm
+Copying /js/.pio/build/wasm-quick/fastled.js to /tmp/tmp_0oq1qlj/wasm/fastled_js/fastled.js
+Copying /js/.pio/build/wasm-quick/fastled.wasm to /tmp/tmp_0oq1qlj/wasm/fastled_js/fastled.wasm
 Copying src/platforms/wasm/compiler/index.html to output directory
 Copying src/platforms/wasm/compiler/index.css to output directory
-Copying files from src/platforms/wasm/compiler/modules to /tmp/tmpwpzhls47/wasm/fastled_js/modules
+Copying files from src/platforms/wasm/compiler/modules to /tmp/tmp_0oq1qlj/wasm/fastled_js/modules
 Copying index.js to output directory
 
 ###############################

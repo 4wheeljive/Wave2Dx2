@@ -7,7 +7,7 @@
 #define NUM_LEDS ( WIDTH * HEIGHT )
 
 #define NUM_SEGMENTS 3
-#define NUM_LEDS_PER_SEGMENT 512
+#define NUM_LEDS_PER_SEGMENT 512    
 
 CRGB leds[NUM_LEDS];
 uint16_t ledNum = 0;
@@ -20,27 +20,16 @@ uint16_t ledNum = 0;
 
 using namespace fl;
 
+// Adjust WaveFX and Blend2d as noted below (until I figure out how to automate this)
 bool screenTest = false;
 bool blendLayers = true;
 
 extern uint16_t loc2indProgByColBottomUp[48][32];
-extern uint16_t loc2indProg[1536];
 
-uint16_t myXYFunctionLED(uint16_t x, uint16_t y, uint16_t width, uint16_t height);
-//uint16_t myXYFunctionScreen(uint16_t x, uint16_t y, uint16_t width, uint16_t height);
+uint16_t myXYFunction(uint16_t x, uint16_t y, uint16_t width, uint16_t height);
 
-XYMap myXYmap = XYMap::constructWithUserFunction(WIDTH, HEIGHT, myXYFunctionLED);
-//XYMap myXYmap = XYMap::constructWithUserFunction(WIDTH, HEIGHT, myXYFunctionScreen);
-XYMap xyRect(WIDTH, HEIGHT, false);   // For the wave simulation (always rectangular grid)
-
-
-//#define IS_SERPENTINE false
-//XYMap xyRect = XYMap::constructRectangularGrid(WIDTH, HEIGHT);
-//uint16_t myXYFuncScreen(uint16_t x, uint16_t y, uint16_t width, uint16_t height);
-//XYMap myXYmap(WIDTH, HEIGHT, IS_SERPENTINE);
-//XYMap myXYrect = XYMap::constructWithUserFunction(WIDTH, HEIGHT, myXYFunction);
-//XYMap myXYmap = XYMap::constructRectangularGrid(WIDTH, HEIGHT);
-
+XYMap myXYmap = XYMap::constructWithUserFunction(WIDTH, HEIGHT, myXYFunction);
+XYMap xyRect = XYMap::constructRectangularGrid(WIDTH, HEIGHT);
 
 //************************************************************************************************************
 
@@ -111,10 +100,14 @@ WaveFx::Args CreateArgsUpper() {
     return out;
 }
 
+// For screenTest, these need to use xyRect
+// For LED panel display, these need to use myXYmap
 WaveFx waveFxLower(myXYmap, CreateArgsLower());
 WaveFx waveFxUpper(myXYmap, CreateArgsUpper()); 
 
-Blend2d fxBlend(myXYmap);
+// For screenTest, this needs to use myXYmap
+// For LED panel display, this needs to use xyRect
+Blend2d fxBlend(xyRect);
 
 //************************************************************************************************************
 
@@ -132,7 +125,6 @@ SuperSample getSuperSample() {
         return SuperSample::SUPER_SAMPLE_NONE;
     }
 }
-
 
 //************************************************************************************************************
 
@@ -231,6 +223,7 @@ void processAutoTrigger(uint32_t now) {
     }
 }
 
+
 //************************************************************************************************************
 
 void setup() {
@@ -293,21 +286,10 @@ void loop() {
 
 //************************************************************************************************************
 
-
-uint16_t myXYFunctionLED(uint16_t x, uint16_t y, uint16_t width, uint16_t height) {
+uint16_t myXYFunction(uint16_t x, uint16_t y, uint16_t width, uint16_t height) {
     width = WIDTH;
     height = HEIGHT;
     if (x >= width || y >= height) return 0;
     ledNum = loc2indProgByColBottomUp[x][y];
-    return ledNum;
-}
-
-
-uint16_t myXYFunctionScreen(uint16_t x, uint16_t y, uint16_t width, uint16_t height) {
-    width = WIDTH;
-    height = HEIGHT;
-    if (x >= width || y >= height) return 0;
-    uint16_t j = (y * WIDTH) + x;
-    ledNum = loc2indProg[j];
     return ledNum;
 }
